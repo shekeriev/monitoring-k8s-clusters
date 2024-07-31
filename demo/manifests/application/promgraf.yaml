@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-promgraf
+  labels:
+    app: demo
+spec:
+  containers:
+  - name: main
+    image: shekeriev/goprom
+    ports:
+    - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-promgraf
+  labels:
+    app: demo
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: demo

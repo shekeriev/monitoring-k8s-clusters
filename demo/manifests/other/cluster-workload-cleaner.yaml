@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: workload-cleaner
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: workload-sa
+          containers:
+          - name: kubectl-container
+            image: bitnami/kubectl:latest
+            command: ["sh", "-c", "kubectl delete pods --field-selector status.phase=Succeeded"]
+          restartPolicy: Never

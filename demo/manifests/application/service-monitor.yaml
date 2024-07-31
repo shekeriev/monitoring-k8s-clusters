@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: promgraf
+  labels:
+    # this should match the serviceMonitorSelector in the Prometheus object
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: demo
+  endpoints:
+  - targetPort: 8080
+    path: /metrics

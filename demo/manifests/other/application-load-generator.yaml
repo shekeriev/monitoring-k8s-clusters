@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: load-generator
+spec:
+  containers:
+  - args:
+    - sh
+    - -c
+    - while true; do w=$((1 + $RANDOM % 60)); echo "* Wait for $w seconds ..."; sleep $w; echo "* Talk to the app ..."; wget -O - -q http://svc-promgraf.default:8080; done
+    image: busybox
+    name: load-generator

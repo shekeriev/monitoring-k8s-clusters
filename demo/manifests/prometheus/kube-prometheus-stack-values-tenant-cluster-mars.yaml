@@ -1,0 +1,19 @@
+# kube-prometheus-stack-values-tenant-cluster-mars.yaml
+#
+# based on https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml
+#
+prometheus:
+  enabled: true
+  service:
+    type: NodePort
+  prometheusSpec:
+    remoteWrite:
+      - url: http://192.168.81.157:30123/api/v1/push
+        headers:
+          X-Scope-OrgID: cluster-mars
+    externalLabels:
+      __tenant_id__ : cluster-mars
+grafana:
+  enabled: false
+alertmanager:
+  enabled: false

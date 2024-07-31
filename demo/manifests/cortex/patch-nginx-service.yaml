@@ -1,0 +1,7 @@
+spec:
+  ports:
+  - name: http-metrics
+    nodePort: 30123
+    port: 80
+    protocol: TCP
+    targetPort: http-metrics

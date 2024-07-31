@@ -1,0 +1,139 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: prometheus
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prometheus
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  - nodes/metrics
+  - services
+  - endpoints
+  - pods
+  verbs: ["get", "list", "watch"]
+- apiGroups: [""]
+  resources:
+  - configmaps
+  verbs: ["get"]
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs: ["get", "list", "watch"]
+- nonResourceURLs: ["/metrics"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus
+subjects:
+- kind: ServiceAccount
+  name: prometheus
+  namespace: default
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: prometheus-cortex
+  namespace: default
+spec:
+  serviceAccountName: prometheus
+  resources:
+    requests:
+      memory: 400Mi
+  enableAdminAPI: false
+  podMonitorNamespaceSelector: {}
+  portName: web
+  probeNamespaceSelector: {}
+  replicas: 1
+  retention: 10d
+  routePrefix: /
+  ruleNamespaceSelector: {}
+  securityContext:
+    fsGroup: 2000
+    runAsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: prometheus
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector:
+    matchLabels:
+      purpose: cortex
+  shards: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-cortex
+spec:
+  type: NodePort
+  ports:
+  - name: web
+    nodePort: 30900
+    port: 9090
+    protocol: TCP
+    targetPort: web
+  selector:
+    prometheus: prometheus-cortex
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-cortex-querier
+  labels:
+    purpose: cortex
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: querier
+  endpoints:
+  - port: http-metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-cortex-distributor
+  labels:
+    purpose: cortex
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: distributor
+  endpoints:
+  - port: http-metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-cortex-store-gateway
+  labels:
+    purpose: cortex
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: store-gateway
+  endpoints:
+  - port: http-metrics
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-cortex-ingester
+  labels:
+    purpose: cortex
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: ingester
+  endpoints:
+  - port: http-metrics

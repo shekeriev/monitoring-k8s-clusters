@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: workload-generator
+spec:
+  serviceAccountName: workload-sa
+  containers:
+  - args:
+    image: bitnami/kubectl:latest
+    command: ['bash', '-c', 'while true; do w=$((1 + $RANDOM % 60)); echo "* Wait for $w seconds ..." ; sleep $w; if [ $((w%2)) -eq 0 ]; then echo "* Start an app ..."; kubectl run --restart=Never some-workload-$(date +%H%M%S) --image=busybox -- sleep $((1 + $RANDOM % 90)); else echo "* Skipping ..."; fi ; done']
+    name: workload-generator
