@@ -2,7 +2,7 @@
 
 Those are deployed on the workload clusters.
 
-The address of the Cortext endpoint used for **remote write** should be changed to match the actual setup. The current value is ***http://192.168.81.157:30123/api/v1/push***
+The address of the Cortext endpoint used for ***remote write*** **MUST** be changed to match the address in the actual setup. The current value is a placeholder ***http://\<the-ip-address-of-jupiter-control-plane\>:30123/api/v1/push***
 
 These are **mandatory** components.
 

@@ -8,7 +8,7 @@ As a first step, the latest operator bundle manifest should be downloaded:
 curl -s https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/bundle.yaml -o prometheus-operator-latest-bundle.yaml
 ```
 
-*Note: On Windows execute ***curl.exe*** instead of just ***curl****
+*Note: On Windows execute **curl.exe** instead of just ***curl**.**
 
 Files:
 

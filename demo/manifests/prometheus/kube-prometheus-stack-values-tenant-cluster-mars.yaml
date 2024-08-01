@@ -8,7 +8,7 @@ prometheus:
     type: NodePort
   prometheusSpec:
     remoteWrite:
-      - url: http://192.168.81.157:30123/api/v1/push
+      - url: http://<the-ip-address-of-jupiter-control-plane>:30123/api/v1/push
         headers:
           X-Scope-OrgID: cluster-mars
     externalLabels:
