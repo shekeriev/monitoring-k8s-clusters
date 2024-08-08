@@ -467,19 +467,19 @@ Return to the terminal session.
 Create the prerequisites:
 
 ```bash
-kubectl apply -f manifests/other/workload-preparation.yaml
+kubectl apply -f manifests/other/cluster-workload-preparation.yaml
 ```
 
 Deploy the workload generator:
 
 ```bash
-kubectl apply -f manifests/other/workload-generator.yaml
+kubectl apply -f manifests/other/cluster-workload-generator.yaml
 ```
 
 And then a cleaner to remove periodically the pods that are not needed anymore:
 
 ```bash
-kubectl apply -f manifests/other/workload-cleaner.yaml
+kubectl apply -f manifests/other/cluster-workload-cleaner.yaml
 ```
 
 Check the created objects:
