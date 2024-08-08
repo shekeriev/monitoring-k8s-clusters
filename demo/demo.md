@@ -305,19 +305,19 @@ Return to the terminal session.
 Create the prerequisites:
 
 ```bash
-kubectl apply -f manifests/other/workload-preparation.yaml
+kubectl apply -f manifests/other/cluster-workload-preparation.yaml
 ```
 
 Deploy the workload generator:
 
 ```bash
-kubectl apply -f manifests/other/workload-generator.yaml
+kubectl apply -f manifests/other/cluster-workload-generator.yaml
 ```
 
 And then a cleaner to remove periodically the pods that are not needed anymore:
 
 ```bash
-kubectl apply -f manifests/other/workload-cleaner.yaml
+kubectl apply -f manifests/other/cluster-workload-cleaner.yaml
 ```
 
 Check the created objects:
@@ -382,7 +382,7 @@ Once in, go to **Connections** > **Data sources** and click the **Add data sourc
 
 Select **Prometheus**. You can rename it to **cortex** or leave the default name **prometheus**.
 
-In the **Prometheus server URL** enter the information for the Cortex NGINX service. If nothing was changed, it should be **http://\<the-ip-address-of-jupiter-control-plane\>:30123/api/v1/push**. Of course, with an actual value instead of the placeholder.
+In the **Prometheus server URL** enter the information for the Cortex NGINX service. If nothing was changed, it should be **http://\<the-ip-address-of-jupiter-control-plane\>:30123/api/prom**. Of course, with an actual value instead of the placeholder.
 
 Scroll down to the **HTTP headers** section. Expand it.
 
