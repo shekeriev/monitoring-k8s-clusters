@@ -553,7 +553,7 @@ We can switch to **Graph** to see the new application-related metrics like **job
 Let's start a load generator for the application to simulate some activity:
 
 ```bash
-kubectl apply -f manifests/other/load-generator.yaml
+kubectl apply -f manifests/other/application-load-generator.yaml
 ```
 
 Check the resulting pods:
@@ -603,7 +603,7 @@ We can switch to **Graph** to see the new application-related metrics like **job
 Let's start a load generator for the application to simulate some activity:
 
 ```bash
-kubectl apply -f manifests/other/load-generator.yaml
+kubectl apply -f manifests/other/application-load-generator.yaml
 ```
 
 Check the resulting pods:
