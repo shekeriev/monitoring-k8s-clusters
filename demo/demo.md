@@ -1,6 +1,6 @@
 # Demo Script
 
-*Note 1:  It is expected that the workstation already has **kubectl** and **helm** installed. If not, they could be installed by following the steps outlined here for **kubectl** (https://kubernetes.io/docs/tasks/tools/#kubectl) and **helm** (https://github.com/helm/helm/releases).*
+*Note 1:  It is expected that the workstation already has **kubectl** and **helm** installed. If not, they could be installed by following the steps outlined here for **kubectl** (<https://kubernetes.io/docs/tasks/tools/#kubectl>) and **helm** (<https://github.com/helm/helm/releases>).*
 
 *Note 2: It is expected that on the workstation there are contexts defined for each of the target clusters.*
 
@@ -120,7 +120,7 @@ ssh user@k8s-jupiter-n1 -- "kubectl get secret/console-sa-secret -n minio-operat
 
 *Don't forget to adjust the username and node name.*
 
-Copy the JWT, open a browser tab and navigate to http://k8s-jupiter-n1:30090/
+Copy the JWT, open a browser tab and navigate to <http://k8s-jupiter-n1:30090/>
 
 *Don't forget to adjust the node name.*
 
@@ -190,7 +190,7 @@ helm install cortex cortex-helm/cortex -f manifests/cortex/cortex-values.yaml
 
 *Note 1: The block for the S3 Block storage refers to the values used so far. If any of them have been changed, then this should be reflected in the values file.*
 
-*Note 2: You can use the stock values file and adjust it according to your needs. It can be downloaded from https://github.com/cortexproject/cortex-helm-chart/blob/master/values.yaml*
+*Note 2: You can use the stock values file and adjust it according to your needs. It can be downloaded from <https://github.com/cortexproject/cortex-helm-chart/blob/master/values.yaml>*
 
 Check the resulting objects:
 
@@ -220,7 +220,7 @@ kubectl patch service cortex-querier --patch-file manifests/cortex/patch-querier
 
 This will set the service type to **NodePort** and will publish it on port **30124**.
 
-This one we can use to see information about our Cortex setup and behavior. For this, we can visit the following URLs in a browser: http://k8s-jupiter-n1:30124/ and http://k8-jupiter-n1:30124/services
+This one we can use to see information about our Cortex setup and behavior. For this, we can visit the following URLs in a browser: <http://k8s-jupiter-n1:30124/> and <http://k8-jupiter-n1:30124/services>
 
 Check if the changes are there:
 
@@ -268,11 +268,11 @@ We can also list just the system objects of Prometheus:
 kubectl --namespace monitoring get Prometheus,PodMonitor,ServiceMonitor
 ```
 
-Now open a browser tab and visit http://k8s-mars-n1:30090 to explore the Prometheus UI.
+Now open a browser tab and visit <http://k8s-mars-n1:30090> to explore the Prometheus UI.
 
 Go to **Status** > **Targets**.
 
-Here we can see that four targets are listed as unhealthy or unreachable. 
+Here we can see that four targets are listed as unhealthy or unreachable.
 
 *Please note that this may vary between different clusters. Tha above is valid for Kubernetes clusters created with **kubeadm**.*
 
@@ -374,7 +374,7 @@ Or just pass the command to the first node of the Jupiter cluster (this is the u
 ssh user@k8s-jupiter-n1 -- 'kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo'
 ```
 
-Open a browser tab and navigate to the Grafana UI by entering http://k8s-jupiter-n1:30030 
+Open a browser tab and navigate to the Grafana UI by entering <http://k8s-jupiter-n1:30030>
 
 Use **admin** as username and the password extracted with the previous command.
 
@@ -392,11 +392,11 @@ Enter **X-Scope-OrgID** in the **Header** field and **cluster-mars|cluster-venus
 
 Click the **Save & test** button.
 
-Now, go to **Dashboards** and click **Create dashboard**. 
+Now, go to **Dashboards** and click **Create dashboard**.
 
 Then click **Add visualization** and select the data source we created earlier.
 
-In the query switch to **Code** and enter **count(kube_pod_info{__tenant_id__="cluster-mars"}) by (node)**. Then click **Run queries**.
+In the query switch to **Code** and enter **count(kube_pod_info{\_\_tenant_id__="cluster-mars"}) by (node)**. Then click **Run queries**.
 
 Change the time range to **Last 30 minutes**.
 
@@ -436,7 +436,7 @@ We can also list just the system objects of Prometheus:
 kubectl --namespace monitoring get Prometheus,PodMonitor,ServiceMonitor
 ```
 
-Now open a browser tab and visit http://k8s-venus-n1:30090 to explore the Prometheus UI.
+Now open a browser tab and visit <http://k8s-venus-n1:30090> to explore the Prometheus UI.
 
 Go to **Status** > **Targets**.
 
@@ -542,9 +542,9 @@ Check the resulting objects:
 kubectl get pods,services,servicemonitors
 ```
 
-We can check the application output by visiting the following URL: http://k8s-mars-n1:30001
+We can check the application output by visiting the following URL: <http://k8s-mars-n1:30001>
 
-And in a similar way, we can check its metrics by visiting: http://k8s-mars-n1:30001/metrics
+And in a similar way, we can check its metrics by visiting: <http://k8s-mars-n1:30001/metrics>
 
 If we switch to the Prometheus UI and go to targets, we should see a new one called **serviceMonitor/default/promgraf/0**
 
@@ -568,7 +568,7 @@ We may check the logs of the load generator with:
 kubectl logs pod/load-generator
 ```
 
-## Application on Cluster Venus 
+## Application on Cluster Venus
 
 *This is optional and it is more or less the same as the previous paragraph.*
 
@@ -592,9 +592,9 @@ Check the resulting objects:
 kubectl get pods,services,servicemonitors
 ```
 
-We can check the application output by visiting the following URL: http://k8s-venus-n1:30001
+We can check the application output by visiting the following URL: <http://k8s-venus-n1:30001>
 
-And in a similar way, we can check its metrics by visiting: http://k8s-venus-n1:30001/metrics
+And in a similar way, we can check its metrics by visiting: <http://k8s-venus-n1:30001/metrics>
 
 If we switch to the Prometheus UI and go to targets, we should see a new one called **serviceMonitor/default/promgraf/0**
 
@@ -696,7 +696,7 @@ Check the resulting objects:
 kubectl get pods,services,servicemonitors
 ```
 
-Visit the UI of the local Prometheus instance that scrapes just the Cortex instance at this URL: http://k8s-jupiter-n1:30900
+Visit the UI of the local Prometheus instance that scrapes just the Cortex instance at this URL: <http://k8s-jupiter-n1:30900>
 
 Check the targets. You should see:
 
