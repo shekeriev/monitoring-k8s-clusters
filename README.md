@@ -10,13 +10,19 @@ Files are provided in the following structure:
 
 * *slides.pdf* file contains the slides of the presentation
 
+## Video
+
+A recorded demonstration can be found here: <https://youtu.be/chrMVk02ofg>
+
 ## Requirements
 
-A station with installed ***kubectl*** and ***helm*** binaries, and access to ***three*** Kubernetes clusters. The demo environment configuration looks like this from infrastructure point of view:
+A station with installed ***kubectl*** and ***helm*** binaries, and access to ***three*** Kubernetes clusters. 
+
+The demo environment configuration looks like this from an infrastructure point of view:
 
 ![image](infrastructure.png)
 
-And like this from workload/component point of view:
+And like this from a workload/component point of view:
 
 ![image](environment.png)
 
